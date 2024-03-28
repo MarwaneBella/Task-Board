@@ -1,0 +1,54 @@
+
+<!-- *ngIf="isOpen == true" -->
+<div *ngIf="isOpen == true"  class="modal fixed w-full h-full top-0 left-0 flex items-center justify-center z-30"  >
+    <div class="modal-overlay absolute w-full h-full bg-gray4 opacity-50"></div>
+    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-lg shadow-xl z-50 overflow-y-auto" clickOutside (clickOutside)="closeModal()" >
+      <div class="modal-content py-4 text-left px-6" >
+        <div class="modal-header mb-8 flex justify-center">
+          <h1 *ngIf="modalData.type == 'create'" class="text-2xl font-medium text-gray-text">Create New Task</h1>
+          <h1 *ngIf="modalData.type == 'update'" class="text-2xl font-medium text-gray-text">Edit Task</h1>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="taskForm" class="flex flex-col gap-4"  (ngSubmit)="onSubmit()">
+                <div>
+                  <label for="taskname" class="block text-gray-text font-medium mb-2">Task name</label>
+                  <input type="text" id="taskname" formControlName="taskname" class="focus:bg-gray1 bg-gray0 text-gray5 appearance-none border-[1px] border-gray1 font-medium rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+              
+                <div>
+                  <label for="description" class="block text-gray-text font-medium mb-2">Description (200 character)</label>
+                  <textarea id="description" formControlName="description" class="focus:bg-gray1 bg-gray0 text-gray5 appearance-none border-[1px] border-gray1 font-medium rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline h-[100px]" maxlength="200"></textarea>
+                </div>
+              
+                <div class="grid grid-cols-3 gap-2 p-2 w-full">
+                  <div>
+                    <input type="radio" formControlName="priority" value="Low" id="1" class="peer hidden" >
+                    <label for="1" class="block cursor-pointer select-none rounded-3xl p-1 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-sky peer-checked:font-bold peer-checked:text-white">Low</label>
+                  </div>
+              
+                  <div>
+                    <input type="radio" formControlName="priority" value="Medium" id="2" class="peer hidden" checked>
+                    <label for="2" class="block cursor-pointer select-none rounded-3xl p-1 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-yellow peer-checked:font-bold peer-checked:text-white">Medium</label>
+                  </div>
+              
+                  <div>
+                    <input type="radio" formControlName="priority" value="High" id="3" class="peer hidden">
+                    <label for="3" class="block cursor-pointer select-none rounded-3xl p-1 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-purple peer-checked:font-bold peer-checked:text-white">High</label>
+                  </div>
+                </div>
+
+                <div class="modal-footer mt-12 flex  gap-4 justify-center">
+                    <button type="submit"  class="bg-gray4 bg-opacity-90 hover:bg-opacity-100 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline" >
+                      <span *ngIf="modalData.type == 'create'">Create</span>
+                      <span *ngIf="modalData.type == 'update'">Update</span>
+                    </button>
+                    <!-- <button class="bg-opacity-90 bg-red hover:bg-opacity-100 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Delete</button> -->
+                    <!-- <button class="bg-red hover:bg-red text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ml-2" (click)="isOpen = false">Cancel</button> -->
+                </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+</div> 
+

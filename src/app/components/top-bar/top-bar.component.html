@@ -1,0 +1,29 @@
+<div class="w-full flex justify-between ">
+    <div class="flex flex-row items-center gap-4">
+      <button class="w-30 bg-gray0 hover:bg-blue1 text-lg font-medium text-gray-text px-4 py-1 border-[1px] border-gray1 rounded-xl" (click)="addTask()" >+ Add Task</button>
+      <div class="relative w-fit" clickOutside (clickOutside)="isdropped = false" >
+
+        <button class="w-30 bg-gray0 hover:bg-blue1 text-lg font-medium text-gray-text px-9 py-1 border-[1px] border-gray1 rounded-xl" (click)="isdropped = !isdropped">Filter</button>
+
+        <div *ngIf="isdropped" class="absolute top-11  z-10 rounded-xl bg-white shadow-sm border-[1px] border-gray2 shadow-gray3 p-4 flex flex-row gap-3 items-center " >
+          
+          <button [ngClass]=" {'bg-[#94a3b8] hover:bg-[#94a3b8]': currentFilter === 'All' }"  (click)="filterData('All')" class="hover:bg-gray0 rounded py-0.5 px-3 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-sky peer-checked:font-bold peer-checked:text-white">All</button>
+          <button [ngClass]=" {'bg-sky hover:bg-sky': currentFilter === 'Low' }" (click)="filterData('Low')"  class="hover:bg-gray0 rounded py-0.5 px-3 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-sky peer-checked:font-bold peer-checked:text-white">Low</button>
+          <button [ngClass]=" {'bg-yellow hover:bg-yellow': currentFilter === 'Medium' }" (click)="filterData('Medium')"  class="hover:bg-gray0 rounded py-0.5 px-3 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-sky peer-checked:font-bold peer-checked:text-white">Medium</button>
+          <button [ngClass]=" {'bg-purple hover:bg-purple': currentFilter === 'High' }" (click)="filterData('High')"  class="hover:bg-gray0 rounded py-0.5 px-3 text-center font-medium text-gray-text border-[2px] border-gray2 peer-checked:bg-sky peer-checked:font-bold peer-checked:text-white">High</button>
+          
+        </div>
+
+      </div>
+
+      
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="flex h-8 gap-1 items-center">
+        <img class="" src="../assets/svg/user logo.svg" alt="" >
+        <img class="" src="../assets/svg/empty user.svg" alt="">
+        <img class="" src="../assets/svg/empty user.svg" alt="">
+      </div>
+      <button class="w-30 bg-gray0 hover:bg-blue1 text-lg font-medium text-gray-text px-5 py-1 border-[1px] border-gray1 rounded-xl flex items-center gap-2"><img class="" src="../assets/svg/share icon.svg" alt="">Share</button>
+    </div>
+  </div>

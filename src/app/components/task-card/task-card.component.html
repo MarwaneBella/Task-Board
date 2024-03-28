@@ -1,0 +1,72 @@
+<div class=" card bg-white rounded-xl flex flex-col p-6 textbold gap-1 shadow-gray3 shadow-md h-48 justify-center" > 
+    <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <img src="../assets/svg/check circle icon.svg" alt="">
+        <span class="text-lg ">{{ task.name }}</span>
+      </div>
+      <div class="relative w-fit" clickOutside (clickOutside)="isdropped1 = false">
+
+        <button class=" hover:bg-blue1 focus:bg-blue1 px-1 py-2.5 rounded-xl" (click)="isdropped1 = !isdropped1" ><img class="" src="../assets/svg/3dots icon.svg" alt=""></button>
+
+        <div *ngIf="isdropped1" class="text-sm absolute top-7 right-0 w-28 z-10 rounded-xl bg-white shadow-sm border-[1px] border-gray2 shadow-gray3 py-4 flex flex-col gap-2 " >
+          
+
+          <button class="w-full py-1 px-3 hover:bg-gray1 flex items-center gap-2" (click)="editTask()"> 
+            <img src="../assets/svg/edit icon.svg" alt="">  
+            <span>Edit</span>
+          </button>
+          
+            
+          <button class="w-full  py-1 px-3 hover:bg-gray1 flex items-center gap-2" (click)="deleteTaskFromColumn(columnId, task.id)"> 
+            <img src="../assets/svg/delete icon.svg" alt="">  
+            <span>Delete </span>
+          </button>
+
+          
+          
+        </div>
+      </div>
+      
+  </div>
+    <div class="flex flex-col pl-7  gap-3">
+      <div class="flex flex-col gap-1">
+        <span class="text-sm ">Description</span>
+        <p class="text-[11px]">{{task.description}}
+        </p>
+      </div>
+      <div class="relative w-fit" clickOutside (clickOutside)="isdropped2 = false" >
+        
+        <button class="w-fit rounded-2xl py-0.3 px-3  hover:opacity-80"  
+        [ngClass]="{
+          'bg-sky': task.priority === 'Low',
+          'bg-yellow': task.priority === 'Medium',
+          'bg-purple': task.priority === 'High'
+        }" 
+         (click)="isdropped2 = !isdropped2">{{task.priority}}</button>
+
+        <div *ngIf="isdropped2" class="absolute top-7 w-48 z-10 rounded-xl bg-white shadow-sm border-[1px] border-gray2 shadow-gray3 p-4 flex flex-col gap-3 " >
+          
+          <div class="flex gap-3 ">
+            <img [ngClass]="task.priority === 'Low' ? 'visible' : 'invisible'"  src="../assets/svg/check icon.svg" alt="">
+            <button class="w-fit rounded-2xl py-0.3 px-3 bg-sky" (click)="updatePriority('Low')">  Low</button>
+          </div> 
+
+          <div class="flex gap-3 ">
+            <img [ngClass]="task.priority === 'Medium' ? 'visible' : 'invisible'"  src="../assets/svg/check icon.svg" alt="">
+            <button class="w-fit rounded-2xl py-0.3 px-3 bg-yellow" (click)="updatePriority('Medium')">  Medium</button>
+          </div>
+
+          <div class="flex gap-3 ">
+            <img [ngClass]="task.priority === 'High' ? 'visible' : 'invisible'" src="../assets/svg/check icon.svg" alt="">
+            <button class="w-fit rounded-2xl py-0.3 px-3 bg-purple" (click)="updatePriority('High')"> High</button>
+          </div>
+          
+          
+        </div>
+      </div>
+      <div class="flex gap-4 items-center">
+        <img class="h-7" src="../assets/svg/user logo.svg" alt="">
+        <span>{{ getFormattedDate(task.date) }}</span>
+      </div>
+    </div>
+  </div>

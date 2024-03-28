@@ -1,0 +1,39 @@
+<div class="flex justify-between gap-9" *ngIf="(allColumnTasks$ | async) as allColumnTasks" cdkDropListGroup >
+
+  <div class=" min-h-[750px] flex flex-col gap-4 w-full" *ngFor="let colunmTask of allColumnTasks; index as i"   >
+    <div class="flex justify-between px-2">
+      <div class="flex gap-1 items-center ">
+        <img *ngIf="i==0" src="../assets/svg/list icon.svg" alt="">
+        <span class="text-lg font-medium text-gray-text">{{ colunmTask.title }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button class="hover:bg-blue1 p-1 rounded-xl" (click)="addNewTask(colunmTask.id)"><img
+            src="../assets/svg/plus icon.svg" alt=""> </button>
+        <!-- <button class="hover:bg-blue1 px-1 py-2.5 rounded-xl"><img class="" src="../assets/svg/3dots icon.svg"
+            alt=""></button> -->
+      </div>
+    </div>
+    <div class="bg-gray0 w-full h-full rounded-xl flex flex-col py-4 px-2"   cdkDropList [cdkDropListData]="{colunmTask}"  (cdkDropListDropped)="drop($event)">
+
+      <div class=" flex flex-col gap-3 " >
+
+          <app-task-card  class="cursor-pointer" *ngFor="let task of colunmTask.tasks; index as i"[task]="task" [columnId]="colunmTask.id" cdkDrag>
+            <div class="example-custom-placeholder h-48 rounded-xl " *cdkDragPlaceholder></div>
+          </app-task-card>
+
+        
+          
+        
+        <!-- <div class="flex justify-center text-gray-text font-medium text-base" >
+            <button class="flex items-center gap-2 "><img class=" h-3" src="../assets/svg/plus icon.svg" alt=""> Add Task
+            </button>
+          </div> -->
+      </div>
+
+    </div>
+    <div class="flex justify-center text-gray-text font-medium text-base ">
+      <button (click)="addNewTask(colunmTask.id)"  class="flex items-center gap-2  hover:bg-blue1 py-1 px-3 rounded-xl "><img class=" h-3" src="../assets/svg/plus icon.svg" alt="" > Add Task </button>
+    </div>
+  </div>
+
+</div>
